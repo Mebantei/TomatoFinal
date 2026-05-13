@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ===== PAGE TITLE ===== */
+h2 {
+    margin-bottom: 15px;
+}
+
+/* ===== FULL PAGE HEIGHT ===== */
+html, body {
+    height: 100%;
+}
+
+/* ===== BODY ===== */
+body {
+    display: flex;
+    flex-direction: column;
+
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* ===== MAIN CONTENT ===== */
+.container {
+    flex: 1;
+    width: 100%;
+}
+
+/* ===== HISTORY LIST ===== */
+#historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ===== HISTORY CARD ===== */
+.history-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 20px;
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #1f1f1f, #3a3a3a);
+
+    color: white;
+
+    box-shadow: 0 6px 18px rgba(255,255,255,0.2);
+
+    transition: all 0.3s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow overlay */
+.history-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(255,255,255,0.2),
+            transparent 60%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.3s;
+}
+
+/* Hover */
+.history-card:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.5);
+}
+
+.history-card:hover::before {
+    opacity: 1;
+}
+
+/* ===== LEFT ===== */
+.history-left {
+    font-size: 16px;
+}
+
+/* ===== RIGHT DATE ===== */
+.history-right {
+
+    margin-right: 55px;
+
+    color: white;
+
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.4);
+}
+
+/* ===== COLORS ===== */
+.red-text {
+    color: #ff6a6a;
+}
+
+.green-text {
+    color: #66ff99;
+}
+
+/* ===== LOGO ===== */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 20px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-history-btn {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 20px;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: rgba(255,0,0,0.15);
+
+    color: white;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.delete-history-btn:hover {
+
+    background: rgba(255,0,0,0.35);
+
+    transform: scale(1.08);
+}
+
+/* ===== MODAL ===== */
+.warning-modal {
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.6);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.warning-box {
+
+    background: #222;
+
+    color: white;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    width: 320px;
+
+    text-align: center;
+}
+
+.warning-buttons {
+
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ===== SUBSCRIBE SECTION ===== */
+.subscribe-section {
+
+    margin-top: 40px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(135deg, #1f1f1f, #3a3a3a);
+
+    color: white;
+}
+
+.subscribe-box {
+
+    margin-top: 15px;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.subscribe-box input {
+
+    padding: 10px;
+
+    width: 250px;
+
+    border-radius: 6px;
+
+    border: none;
+    outline: none;
+}
+
+.subscribe-box button {
+
+    padding: 10px 15px;
+
+    border-radius: 6px;
+
+    border: none;
+
+    background: #28a745;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.subscribe-box button:hover {
+    background: #1e7e34;
+}
+
+/* ===== MESSAGE ===== */
+#subscribeMsg {
+    margin-top: 10px;
+    color: #66ff99;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+
+    text-align: center;
+
+    padding: 15px;
+
+    background: #111;
+
+    color: #aaa;
+}
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+
+    display: none;
+
+    font-size: 32px;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+
+        position: absolute;
+
+        top: 70px;
+        right: 20px;
+
+        width: 220px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(30,30,30,0.95),
+                rgba(50,50,50,0.95)
+            );
+
+        backdrop-filter: blur(10px);
+
+        border-radius: 16px;
+
+        padding: 20px;
+
+        display: none;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        z-index: 9999;
+    }
+
+    /* SHOW MENU */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 20px;
+
+        padding-bottom: 10px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.2);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+
+    <div class="logo-container">
+        <img src="Image/Tomato.png"
+             alt="Logo"
+             class="logo">
+
+        <h2>Tomato System</h2>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+        ☰
+    </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="summary.html">View Summary</a>
+        <a href="history.html">History</a>
+    </div>
+
+</nav>
+
+<!-- ===== MAIN ===== -->
+<div class="container">
+
+    <h2>📜 Sorting History</h2>
+
+    <div id="historyList"></div>
+
+</div>
+
+<!-- ===== DELETE MODAL ===== -->
+<div class="warning-modal" id="deleteModal">
+
+    <div class="warning-box">
+
+        <h3>⚠ Confirm Deletion</h3>
+
+        <p>
+            Do you wish to delete this history?
+        </p>
+
+        <div class="warning-buttons">
+
+            <button id="confirmDelete">
+                Yes Delete
+            </button>
+
+            <button id="cancelDelete">
+                No Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===== SUBSCRIBE ===== -->
+<section class="subscribe-section">
+
+    <h2>Stay Updated</h2>
+
+    <p>
+        Subscribe to get updates about
+        tomato sorting results and system improvements.
+    </p>
+
+    <div class="subscribe-box">
+
+        <input type="email"
+               id="emailInput">
+
+        <button id="subscribeBtn">
+            Subscribe
+        </button>
+
+    </div>
+
+    <p id="subscribeMsg"></p>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+
+    <p>
+        © 2026 Tomato Grading System | MTech Project
+    </p>
+
+</footer>
+
+<!-- ===== SCRIPT ===== -->
+<script src="history.js"></script>
+
+</body>
+</html>

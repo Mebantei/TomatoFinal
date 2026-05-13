@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomato Sorting</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ===== CARD (NO HOVER EFFECT) ===== */
+.card {
+    background: linear-gradient(135deg, #ffffff, #f3f3f3);
+    padding: 18px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+    transition: none; /* 🚫 disables hover animation */
+}
+
+
+/* ===== BUTTON GROUP ===== */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* ===== BASE BUTTON ===== */
+button {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+/* START BUTTON */
+#startMotor {
+    background: linear-gradient(135deg, #28a745, #006600);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,128,0,0.3);
+}
+
+#startMotor:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,128,0,0.4);
+}
+
+/* STOP BUTTON */
+#stopMotor {
+    background: linear-gradient(135deg, #ff4d4d, #cc0000);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255,0,0,0.3);
+}
+
+#stopMotor:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255,0,0,0.4);
+}
+
+/* CLICK EFFECT */
+button:active {
+    transform: scale(0.95);
+}
+
+/* ===== STATUS BOX ===== */
+#statusText {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+/* ===== DETECTION BOX ===== */
+#detectionText {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+}
+
+/* ACTIVE STATES (JS can update class later) */
+.active-green {
+    color: #00aa00;
+}
+
+.active-red {
+    color: #cc0000;
+}
+/* ===== SUBSCRIBE SECTION ===== */
+.subscribe-section {
+    margin-top: 40px;
+    padding: 30px 20px;
+    text-align: center;
+
+    background: linear-gradient(135deg, #1f1f1f, #3a3a3a);
+    color: white;
+}
+
+.subscribe-section h2 {
+    margin-bottom: 10px;
+}
+
+.subscribe-box {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.subscribe-box input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.subscribe-box button {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    background: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.subscribe-box button:hover {
+    background: #1e7e34;
+}
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+/* ===== MESSAGE ===== */
+#subscribeMsg {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #66ff99;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #111;
+    color: #aaa;
+    font-size: 14px;
+}
+/* ===== WARNING MODAL ===== */
+.warning-modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.warning-box {
+    width: 320px;
+
+    background: linear-gradient(135deg, #1f1f1f, #2e2e2e);
+
+    color: white;
+
+    padding: 25px;
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+    animation: popupFade 0.3s ease;
+}
+
+.warning-box h3 {
+    margin-bottom: 10px;
+}
+
+.warning-box p {
+    font-size: 15px;
+    color: #ddd;
+}
+
+.warning-buttons {
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.warning-buttons button {
+    min-width: 110px;
+}
+
+#stopAndLeave {
+    background: linear-gradient(135deg, #ff4d4d, #cc0000);
+    color: white;
+}
+
+#continueRunning {
+    background: linear-gradient(135deg, #28a745, #006600);
+    color: white;
+}
+
+@keyframes popupFade {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo-container">
+    <img src="Image/Tomato.png" alt="Logo" class="logo">
+    <h2>Tomato System</h2>
+</div>
+<div class="menu-toggle" id="menuToggle">☰</div>
+
+<div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="summary.html">View Summary</a>
+    <a href="history.html">History</a>
+</div>
+</nav>
+
+<div class="container">
+
+    <header>
+        <h1>Hello! Welcome to my MTech Project</h1>
+    </header>
+
+    <!-- CONTROL -->
+    <section class="card">
+        <h3> Click Here To detect Tomato</h3>
+        <div class="btn-group">
+            <button id="startDetect">Start </button>
+            <button id="stopDetect">Stop </button>
+        </div>
+    </section>
+
+    <!-- STATUS -->
+    <section class="card">
+        <h3> Status</h3>
+        <p id="statusText">Idle</p>
+    </section>
+
+    <!-- DETECTION -->
+    <section class="card">
+        <h3> Detection</h3>
+        <p id="detectionText">
+            Start the motor to see whether the tomato is there or not
+        </p>
+    </section>
+
+</div>
+<!-- ===== DETECTION WARNING MODAL ===== -->
+<div class="warning-modal" id="warningModal">
+
+    <div class="warning-box">
+
+        <h3>⚠ Detection Running</h3>
+
+        <p>
+            Your detection system is currently running.
+            Do you want to stop it before leaving this page?
+        </p>
+
+        <div class="warning-buttons">
+
+            <button id="stopAndLeave">
+                Yes Stop
+            </button>
+
+            <button id="continueRunning">
+                No Keep Running
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ===== SUBSCRIBE SECTION ===== -->
+<section class="subscribe-section">
+    <h2>Stay Updated</h2>
+    <p>Subscribe to get updates about tomato sorting results and system improvements.</p>
+
+    <div class="subscribe-box">
+        <input type="email" id="emailInput">
+<button id="subscribeBtn">Subscribe</button>
+<p id="subscribeMsg"></p>
+    </div>
+
+    <p id="subscribeMsg"></p>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>© 2026 Tomato Grading System | MTech Project</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
