@@ -4,7 +4,9 @@ const cors = require("cors");
 const fs = require("fs");
 const { SerialPort } = require("serialport");
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "*"
+}));
 app.use(express.json());
 
 // ================= ARDUINO SERIAL =================
