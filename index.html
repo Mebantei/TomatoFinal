@@ -147,11 +147,14 @@ body {
 
 /* ===== FOOTER ===== */
 .footer {
+
     text-align: center;
+
     padding: 15px;
+
     background: #111;
+
     color: #aaa;
-    font-size: 14px;
 }
 /* ===== WARNING MODAL ===== */
 .warning-modal {
@@ -226,6 +229,28 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+body {
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+/* Main content area */
+.container {
+
+    flex: 1;
+}
+
+/* Footer */
+.footer {
+
+    margin-top: 0;
 }
 </style>
 
