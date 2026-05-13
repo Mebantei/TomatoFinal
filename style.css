@@ -656,3 +656,14 @@ body {
 
     margin-top: auto;
 }
+/* ===== FOOTER ===== */
+.footer {
+
+    text-align: center;
+
+    padding: 15px;
+
+    background: #111;
+
+    color: #aaa;
+}
