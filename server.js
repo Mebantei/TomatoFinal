@@ -11,20 +11,34 @@ app.use(express.json());
 
 // ================= ARDUINO SERIAL =================
 
-let port;
+// ================= ARDUINO SERIAL =================
 
-try {
+let port = null;
 
-    port = new SerialPort({
-        path: "COM9", // change this
-        baudRate: 9600
-    });
+// ONLY TRY ARDUINO LOCALLY
+if (process.env.RENDER !== "true") {
 
-    console.log("✅ Arduino Connected");
+    try {
 
-} catch (err) {
+        port = new SerialPort({
+            path: "COM9",
+            baudRate: 9600
+        });
 
-    console.log("❌ Arduino Not Connected");
+        port.on("open", () => {
+
+            console.log("✅ Arduino Connected");
+        });
+
+        port.on("error", (err) => {
+
+            console.log("❌ Arduino Error:", err.message);
+        });
+
+    } catch (err) {
+
+        console.log("❌ Arduino Not Connected");
+    }
 }
 // ================= FILE SETUP =================
 const FILE = "subscribers.json";
