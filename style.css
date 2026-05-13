@@ -666,19 +666,34 @@ body {
     background: #111;
 
     color: #aaa;
+}   
+/* Main page content */
+.container {
+
+    flex: 1;
 }
+/* ===== REMOVE SPACE BELOW FOOTER ===== */
+
 html,
 body {
 
-    min-height: 100vh;
+    min-height: 100%;
+
+    margin: 0;
 
     display: flex;
 
     flex-direction: column;
 }
 
-/* Main page content */
+/* Main content wrapper */
 .container {
 
     flex: 1;
+}
+
+/* Footer */
+.footer {
+
+    margin-top: auto;
 }
