@@ -55,9 +55,9 @@ if (fs.existsSync(FILE)) {
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "formalin857@gmail.com",
-        pass: "kxgdlodzvlvpbmjb" // 🔐 replace with your app password
-    }
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+}
 });
 
 // ================= SUBSCRIBE API =================
