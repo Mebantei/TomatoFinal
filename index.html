@@ -252,6 +252,36 @@ body {
 
     margin-top: 0;
 }
+/* ===== LIVE DATE TIME ===== */
+
+/* MOBILE */
+/* ===== MOBILE DATE TIME ===== */
+
+@media (max-width: 768px) {
+
+
+    /* Smaller title */
+    .logo-container h2 {
+
+        font-size: 16px;
+    }
+
+    /* Smaller logo */
+    .logo {
+
+        width: 28px;
+
+        height: 28px;
+    }
+
+    /* Hamburger */
+    .menu-toggle {
+
+        font-size: 28px;
+
+        margin-left: auto;
+    }
+}
 </style>
 
 </head>
@@ -259,17 +289,38 @@ body {
 <body>
 
 <nav class="navbar">
-    <div class="logo-container">
-    <img src="Image/Tomato.png" alt="Logo" class="logo">
-    <h2>Tomato System</h2>
-</div>
-<div class="menu-toggle" id="menuToggle">☰</div>
 
-<div class="nav-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="summary.html">View Summary</a>
-    <a href="history.html">History</a>
-</div>
+    <div class="logo-container">
+
+        <img src="Image/Tomato.png"
+             alt="Logo"
+             class="logo">
+
+        <h2>Tomato System</h2>
+
+    </div>
+
+    <!-- LIVE DATE & TIME -->
+    <!-- <div class="date-time" id="dateTime"></div> -->
+
+    <div class="menu-toggle" id="menuToggle">
+        ☰
+    </div>
+
+    <div class="nav-links" id="navLinks">
+
+        <a href="index.html">Home</a>
+
+        <a href="summary.html">
+            View Summary
+        </a>
+
+        <a href="history.html">
+            History
+        </a>
+
+    </div>
+
 </nav>
 
 <div class="container">

@@ -306,6 +306,25 @@ body {
 
 /* ===== MOBILE NAV ===== */
 @media (max-width: 768px) {
+/* Smaller title */
+.logo-container h2 {
+
+    font-size: 16px;
+}
+
+/* Smaller logo */
+.logo {
+
+    width: 28px;
+
+    height: 28px;
+}
+
+/* Hamburger */
+.menu-toggle {
+
+    font-size: 28px;
+}
 
     .menu-toggle {
         display: block;
@@ -370,25 +389,37 @@ body {
 <nav class="navbar">
 
     <div class="logo-container">
+
         <img src="Image/Tomato.png"
              alt="Logo"
              class="logo">
 
         <h2>Tomato System</h2>
+
     </div>
+
+    <!-- LIVE DATE & TIME -->
+    <!-- <div class="date-time" id="dateTime"></div> -->
 
     <div class="menu-toggle" id="menuToggle">
         ☰
     </div>
 
     <div class="nav-links" id="navLinks">
+
         <a href="index.html">Home</a>
-        <a href="summary.html">View Summary</a>
-        <a href="history.html">History</a>
+
+        <a href="summary.html">
+            View Summary
+        </a>
+
+        <a href="history.html">
+            History
+        </a>
+
     </div>
 
 </nav>
-
 <!-- ===== MAIN ===== -->
 <div class="container">
 
