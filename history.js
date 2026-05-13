@@ -114,7 +114,7 @@ document.getElementById("subscribeBtn").addEventListener("click", async () => {
     }
 
     try {
-        await fetch("http://localhost:3000/subscribe", {
+        await fetch("https://tomatofinal.onrender.com/subscribe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
