@@ -16,7 +16,7 @@ app.use(express.json());
 let port = null;
 
 // ONLY TRY ARDUINO LOCALLY
-if (process.env.RENDER !== "true") {
+if (process.env.NODE_ENV !== "production") {
 
     try {
 
@@ -123,6 +123,16 @@ app.post("/start-detection", (req, res) => {
 
 // STOP DETECTION
 app.post("/stop-detection", (req, res) => {
+
+    // Arduino not connected
+    if (!port || !port.isOpen) {
+
+        console.log("❌ Arduino not connected");
+
+        return res.status(500).send(
+            "Arduino not connected"
+        );
+    }
 
     // SEND STOP SIGNAL TO ARDUINO
     port.write("0");
