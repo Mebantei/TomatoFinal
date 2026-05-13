@@ -667,3 +667,18 @@ body {
 
     color: #aaa;
 }
+html,
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+/* Main page content */
+.container {
+
+    flex: 1;
+}
