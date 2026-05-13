@@ -16,32 +16,15 @@ let port;
 try {
 
     port = new SerialPort({
-        path: "COM3", // change this
-        baudRate: 9600,
-        autoOpen: false
+        path: "COM9", // change this
+        baudRate: 9600
     });
 
-    port.open((err) => {
-
-        if (err) {
-
-            console.log(
-                "❌ Arduino NOT connected"
-            );
-
-            return;
-        }
-
-        console.log(
-            "✅ Arduino Connected"
-        );
-    });
+    console.log("✅ Arduino Connected");
 
 } catch (err) {
 
-    console.log(
-        "❌ Serial setup failed"
-    );
+    console.log("❌ Arduino Not Connected");
 }
 // ================= FILE SETUP =================
 const FILE = "subscribers.json";
@@ -55,11 +38,15 @@ if (fs.existsSync(FILE)) {
 
 // ================= EMAIL SETUP =================
 const transporter = nodemailer.createTransport({
+
     service: "gmail",
+
     auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-}
+
+        user: process.env.EMAIL_USER,
+
+        pass: process.env.EMAIL_PASS
+    }
 });
 
 // ================= SUBSCRIBE API =================
@@ -131,6 +118,9 @@ app.post("/stop-detection", (req, res) => {
     res.send("Detection stopped");
 });
 // ================= START SERVER =================
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+
+    console.log(`Server running on port ${PORT}`);
 });
