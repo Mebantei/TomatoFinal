@@ -27,7 +27,7 @@ async () => {
     try {
 
         const response = await fetch(
-            "http://172.17.61.255:3000/start-detection",
+            "https://tomatofinal.onrender.com/start-detection",
             {
                 method: "POST"
             }
@@ -79,7 +79,7 @@ async () => {
     try {
 
         await fetch(
-            "http://172.17.61.255:3000/stop-detection",
+            "https://tomatofinal.onrender.com/stop-detection",
             {
                 method: "POST"
             }
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("http://172.17.61.255:3000/subscribe", {
+            const response = await fetch("https://tomatofinal.onrender.com/subscribe", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
