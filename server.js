@@ -8,7 +8,7 @@ app.use(cors({
     origin: "*"
 }));
 app.use(express.json());
-
+app.use(express.static(__dirname));
 // ================= ARDUINO SERIAL =================
 
 // ================= ARDUINO SERIAL =================
